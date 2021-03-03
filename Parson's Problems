@@ -1,0 +1,29 @@
+
+
+
+#Write your answer to Parson's Problem #1 below:
+#basic for loop
+
+for x in range(0,10):
+	print("Hello world!")
+
+
+#Write your answer to Parson's Problem #2 below:
+#basic list
+
+myList = []
+myList.append("apples")
+myList.append("pineapples")
+print (myList)
+
+
+#Write your answer to Parson's Problem #3 below:
+#basic conditional
+
+x = input("Type a number")
+x = int(x)
+
+if x > 0:
+        print("That's more than nothing!")
+else:
+        print("That's a small number!")
