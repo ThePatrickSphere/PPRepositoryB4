@@ -1,5 +1,6 @@
 import random
 myList = []
+unique_list = []
 def mainProgram():
     while True:
         try:
@@ -23,7 +24,7 @@ def mainProgram():
             elif choice == "5":
                 linearSearch()
             elif choice == "6":
-                print(mylist)
+                sortList(myList)
             else:
                 break
             
@@ -41,12 +42,22 @@ def addABunch():
     numberRange = input("And how high would you like these numbers to go?   ")
     for x in range(0, int(numberToAdd)):
         myList.append(random.randint(0, int(numberRange)))
-    print("Your list is now complete! Type 5 to see list.")
+    print("Your list is now complete! Type 6 to see list.")
 
 def indexValues():
     print ("Getting a particular piece of data...")
     indexPos = input("What index position are you curious about?     ")
     print(myList[int(indexPos)])
+
+def sortList(myList):
+    print("Sorting your list...")
+    for x in myList:
+        if x not in unique_list:
+            unique_list.append(x)
+    unique_list.sort()
+    showMe = input("Do you want to see your new list?  Y/N")
+    if showMe.lower() == "y":
+        print(unique_list)
 
 def randomSearch():
     print("Randomly searching...")
@@ -58,6 +69,17 @@ def linearSearch():
     for x in range(len(myList)):
         if myList[x] == int(searchItem):
             print("Your item is at index position {}".format(x))
+
+def printLists():
+    if len(unique_list) == 0:
+        print(myList)
+    else:
+        whichOne = input("Which list? Sorted or unsorted?   ")
+        if whichOne.lower() == "sorted":
+            print(unique_list)
+        else:
+            print(myList)
+        
 
 if __name__ == "__main__":
     mainProgram()
