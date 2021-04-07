@@ -1,6 +1,7 @@
 import random
 myList = []
 unique_list = []
+
 def mainProgram():
     while True:
         try:
@@ -8,11 +9,14 @@ def mainProgram():
             print("Choose one of the following options. Type a number below.")
             choice = input("""1. Add to a list
 2. Add a bunch of numbers
-3. Return a value at an index
-4. Random search
-5. Linear search
-6. Print contents of list
-7. Exit program""")
+3. Return a value at an index position
+4. Sort list
+5. Random search
+6. Linear search
+7. Recursive binary search
+8. Iterative binary search
+9. Print list
+10. Quit program""")
             if choice == "1":
                 addToList()
             elif choice == "2":
@@ -20,11 +24,23 @@ def mainProgram():
             elif choice == "3":
                 indexValues()
             elif choice == "4":
-                randomSearch()
-            elif choice == "5":
-                linearSearch()
-            elif choice == "6":
                 sortList(myList)
+            elif choice == "5":
+                randomSearch()
+            elif choice == "6":
+                linearSearch()
+            elif choice == "7":
+                binSearch = input("What number are you looking for?   ")
+                recursiveBinarySearch(unique_list, 0, len(unique_list)-1, int(binSearch))
+            elif choice == "8":
+                binSearch = input("What number are you looking for?   ")
+                result = iterativeBinarySearch(unique_list, int(binSearch))
+                if result != -1:
+                    print("Your number is at index position {}".format(result))
+                else:
+                    print("Your number is not found in that list, bud!")
+            elif choice == "9":
+                printLists()
             else:
                 break
             
@@ -42,7 +58,7 @@ def addABunch():
     numberRange = input("And how high would you like these numbers to go?   ")
     for x in range(0, int(numberToAdd)):
         myList.append(random.randint(0, int(numberRange)))
-    print("Your list is now complete! Type 6 to see list.")
+    print("Your list is now complete! Type 9 to see list.")
 
 def indexValues():
     print ("Getting a particular piece of data...")
@@ -62,6 +78,8 @@ def sortList(myList):
 def randomSearch():
     print("Randomly searching...")
     print(myList[random.randint(0, len(myList)-1)])
+    if len(unique_list) > 0:
+        print(unique_list[random.randint(0, len(unique_list)-1)])
 
 def linearSearch():
     print("Checking out each item one at a time in your list...")
@@ -69,6 +87,36 @@ def linearSearch():
     for x in range(len(myList)):
         if myList[x] == int(searchItem):
             print("Your item is at index position {}".format(x))
+
+def recursiveBinarySearch(unique_list, low, high, x):
+    if high >= low:
+        mid = (high + low) // 2
+
+        if unique_list[mid] == x:
+            print("Your number is at index position {}".format(mid))
+            return mid
+        elif unique_list[mid] > x:
+            return recursiveBinarySearch(unique_list, low, mid - 1, x)
+        else:
+            return recursiveBinarySearch(unique_list, mid + 1, high, x)
+    else:
+        print("Your number isn't here.")
+
+def iterativeBinarySearch(unique_list, x):
+    low = 0
+    high = len(unique_list)-1
+    mid = 0
+
+    while low <= high:
+        mid = (high + low) // 2
+
+        if unique_list[mid] < x:
+            low = mid + 1
+        elif unique_list[mid] > x:
+            high = mid - 1
+        else:
+            return mid
+    return -1
 
 def printLists():
     if len(unique_list) == 0:
