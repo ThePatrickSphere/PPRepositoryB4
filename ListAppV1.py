@@ -14,9 +14,10 @@ def mainProgram():
 5. Linear search
 6. Recursive binary search
 7. Iterative binary search
-8. Sort List
-9. Print list
-10. Quit program""")
+8. Sort list
+9. Remove from list
+10. Print list
+11. Quit program""")
             if choice == "1":
                 addToList()
             elif choice == "2":
@@ -40,6 +41,8 @@ def mainProgram():
             elif choice == "8":
                 sortList(myList)
             elif choice == "9":
+                removeNumber()
+            elif choice == "10":
                 printLists()
             else:
                 break
@@ -58,7 +61,7 @@ def addABunch():
     numberRange = input("And how high would you like these numbers to go?   ")
     for x in range(0, int(numberToAdd)):
         myList.append(random.randint(0, int(numberRange)))
-    print("Your list is now complete! Type 9 to see list.")
+    print("Your list is now complete! Type 10 to see list.")
 
 def indexValues():
     print ("Getting a particular piece of data...")
@@ -117,6 +120,18 @@ def iterativeBinarySearch(unique_list, x):
         else:
             return mid
     return -1
+
+def removeNumber():
+    print("Deleting a number...")
+    deleteItem = input("Which number would you like to remove?    ")
+    if len(unique_list) == 0:
+        myList.remove(int(deleteItem))
+        print(myList)
+    else:
+        unique_list.remove(int(deleteItem))
+        myList.remove(int(deleteItem))
+        print(unique_list)
+    print("The number {} was removed from your list!".format(deleteItem))
 
 def printLists():
     if len(unique_list) == 0:
